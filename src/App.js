@@ -4,22 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Header = (props) => {
     return (
-        <div className="row">
-            <div className="col">
-                <header className="page-header">
-                    <h1 className="display-3">{props.message}</h1>
-                </header>
-            </div>
-        </div>
+        <header className="page-header">
+            <h1 className="display-3">{props.message}</h1>
+        </header>
     );
 }
 
-const StateButton = (props) => {
+const StartRaceButton = (props) => {
     return (
-        <div className="row">
-            <div className="col button-section">
-                <button type="button" className="btn btn-success btn-block" onClick={props.onHandleClick}>STATE + 1</button>
-            </div>
+        <div className="button-section">
+            <button type="button" className="btn btn-success btn-block" onClick={props.onHandleClick}>Start race</button>
         </div>
     );
 }
@@ -53,13 +47,21 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <Header message="Welcome ReactJS!"/>
+                <div className="row">
+                    <div className="col">
+                        <Header message="HorseRace React"/>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col">
                         <ProgressBar value={this.state.progressValue}/>
                     </div>
                 </div>
-                <StateButton onHandleClick={this.handleClick}/>
+                <div className="row">
+                    <div className="col">
+                        <StartRaceButton onHandleClick={this.handleClick}/>
+                    </div>
+                </div>
             </div>
         );
     }
