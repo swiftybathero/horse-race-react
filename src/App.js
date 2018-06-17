@@ -26,10 +26,6 @@ class App extends Component {
     };
     raceId = 0;
 
-    startRaceClick = () => {
-        setTimeout(this.runRace, 1);
-    };
-
     randomize = () => {
         const min = 1;
         const max = 5;
@@ -38,7 +34,15 @@ class App extends Component {
         return rand;
     };
 
+    startRaceClick = () => {
+        setTimeout(this.runRace, 1);
+    };
+
     runRace = () => {
+        if (this.state.horses.length <= 0) {
+            return;
+        }
+
         let raceFinished = false;
         this.state.horses.forEach((horse) => {
             let randomValue = this.randomize();
