@@ -4,8 +4,20 @@ h1 {
 
 .page-header {
     border-bottom: 1px solid #eee;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }
 
 .button-section {
-    margin-top: 20px
+    margin-top: 20px;
+}
+
+.horse-progress {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-group.row.horse {
+    margin-bottom: 0.5rem;
 }

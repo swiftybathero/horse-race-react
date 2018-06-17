@@ -1,51 +1,71 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddContestantForm from './AddContestantForm';
+import HorseList from './HorseList';
 
 const Header = (props) => {
     return (
-        <div className="row">
-            <div className="col">
-                <header className="page-header">
-                    <h1 className="display-3">{props.message}</h1>
-                </header>
-            </div>
-        </div>
+        <header className="page-header">
+            <h1 className="display-3">{props.message}</h1>
+        </header>
     );
 }
 
-const StateButton = (props) => {
+const StartRaceButton = (props) => {
     return (
-        <div className="row">
-            <div className="col button-section">
-                <button type="button" className="btn btn-success btn-block" onClick={props.onHandleClick}>STATE + 1</button>
-            </div>
-        </div>
-    );
-}
-
-const ProgressBar = (props) => {
-    let progressStyle = {
-        width: props.value + "%"
-    };
-    let progressClassName = "progress-bar" + (props.value >= 100 ? " bg-success" : "");
-
-    return (
-        <div className="progress">
-            <div className={progressClassName} role="progressbar" style={progressStyle}></div>
+        <div className="button-section">
+            <button type="button" className="btn btn-success btn-block" onClick={props.onStartRaceClick}>Start race</button>
         </div>
     );
 }
 
 class App extends Component {
     state = {
-        progressValue: 0
+        horses: []
+    };
+    raceId = 0;
+
+    randomize = () => {
+        const min = 1;
+        const max = 5;
+        var rand = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        return rand;
     };
 
-    handleClick = () => {
+    startRaceClick = () => {
+        setTimeout(this.runRace, 1);
+    };
+
+    runRace = () => {
+        if (this.state.horses.length <= 0) {
+            return;
+        }
+
+        let raceFinished = false;
+        this.state.horses.forEach((horse) => {
+            let randomValue = this.randomize();
+            horse.position += randomValue;
+            if (horse.position >= 100) {
+                raceFinished = true;
+            }
+        });
+        this.setState(this.state);
+
+        if (!raceFinished) {
+            setTimeout(this.runRace, 100);
+        }
+    };
+
+    addContestantClick = (contestantName) => {
         this.setState((prevState) => {
             return {
-                progressValue: prevState.progressValue + 10
+                horses: prevState.horses.concat({
+                    id: prevState.horses.length + 1,
+                    name: contestantName,
+                    position: 0
+                })
             };
         });
     };
@@ -53,13 +73,26 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <Header message="Welcome ReactJS!"/>
                 <div className="row">
                     <div className="col">
-                        <ProgressBar value={this.state.progressValue}/>
+                        <Header message="HorseRace React"/>
                     </div>
                 </div>
-                <StateButton onHandleClick={this.handleClick}/>
+                <div className="row">
+                    <div className="col">
+                        <AddContestantForm onAddContestantClick={this.addContestantClick}/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <HorseList horses={this.state.horses}/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <StartRaceButton onStartRaceClick={this.startRaceClick}/>
+                    </div>
+                </div>
             </div>
         );
     }
