@@ -10,14 +10,12 @@ class App extends Component {
     state = {
         horses: []
     };
-    raceId = 0;
 
     randomize = () => {
         const min = 1;
-        const max = 5;
-        var rand = Math.floor(Math.random() * (max - min + 1)) + min;
+        const max = 5; 
 
-        return rand;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
     startRaceClick = () => {
@@ -28,8 +26,8 @@ class App extends Component {
         if (this.state.horses.length <= 0) {
             return;
         }
-
         let raceFinished = false;
+        
         this.state.horses.forEach((horse) => {
             let randomValue = this.randomize();
             horse.position += randomValue;
