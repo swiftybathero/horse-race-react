@@ -13,6 +13,7 @@ class AddContestantForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+
         this.props.onAddContestantClick(this.state.horseName);
         this.setState({
             horseName: ""
@@ -21,7 +22,7 @@ class AddContestantForm extends Component {
 
     render() {
         return (
-            <form className="contestant-form" onSubmit={this.handleSubmit}>
+            <form className="contestant-form" ref="contestantForm" onSubmit={this.handleSubmit} noValidate>
                 <div className="form-group">
                     <label htmlFor="horseName">Horse name</label>
                     <div className="input-group">
@@ -31,7 +32,8 @@ class AddContestantForm extends Component {
                             value={this.state.horseName}
                             className="form-control"
                             placeholder="Enter your horse name" 
-                            onChange={this.handleInputChange}/>
+                            onChange={this.handleInputChange}
+                            required/>
                         <div className="input-group-append">
                             <button type="submit" className="btn btn-success">Add</button>
                         </div>

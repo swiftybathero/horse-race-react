@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddContestantForm from './AddContestantForm'
+import AddContestantForm from './AddContestantForm';
+import HorseList from './HorseList';
 
 const Header = (props) => {
     return (
@@ -19,37 +20,38 @@ const StartRaceButton = (props) => {
     );
 }
 
-const HorseList = (props) => {
-    return (
-        props.horses.map(horse => <Horse key={horse.id} {...horse} />)
-    );
-}
-
-const Horse = (props) => {
-    let progressClassName = "progress-bar" + (props.position >= 100 ? " bg-success" : "");
-    let progressStyle = {
-        width: props.position + "%"
-    };
-
-    return (
-        <div className="form-group row horse">
-            <label className="col-sm-2 col-form-label" htmlFor={"horse-" + props.id}>{props.name}</label>
-            <div className="col-sm-10 horse-progress">
-                <div className="progress">
-                    <div className={progressClassName} id={"horse-" + props.id} role="progressbar" style={progressStyle}></div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
 class App extends Component {
     state = {
         horses: []
     };
+    raceId = 0;
 
     startRaceClick = () => {
-        console.log("Race started!")
+        setTimeout(this.runRace, 1);
+    };
+
+    randomize = () => {
+        const min = 1;
+        const max = 5;
+        var rand = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        return rand;
+    };
+
+    runRace = () => {
+        let raceFinished = false;
+        this.state.horses.forEach((horse) => {
+            let randomValue = this.randomize();
+            horse.position += randomValue;
+            if (horse.position >= 100) {
+                raceFinished = true;
+            }
+        });
+        this.setState(this.state);
+
+        if (!raceFinished) {
+            setTimeout(this.runRace, 100);
+        }
     };
 
     addContestantClick = (contestantName) => {
@@ -57,7 +59,8 @@ class App extends Component {
             return {
                 horses: prevState.horses.concat({
                     id: prevState.horses.length + 1,
-                    name: contestantName
+                    name: contestantName,
+                    position: 0
                 })
             };
         });
