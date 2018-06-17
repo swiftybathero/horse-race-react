@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddContestantForm from './AddContestantForm'
 
 const Header = (props) => {
     return (
@@ -13,33 +14,51 @@ const Header = (props) => {
 const StartRaceButton = (props) => {
     return (
         <div className="button-section">
-            <button type="button" className="btn btn-success btn-block" onClick={props.onHandleClick}>Start race</button>
+            <button type="button" className="btn btn-success btn-block" onClick={props.onStartRaceClick}>Start race</button>
         </div>
     );
 }
 
-const ProgressBar = (props) => {
+const HorseList = (props) => {
+    return (
+        props.horses.map(horse => <Horse key={horse.id} {...horse} />)
+    );
+}
+
+const Horse = (props) => {
+    let progressClassName = "progress-bar" + (props.position >= 100 ? " bg-success" : "");
     let progressStyle = {
-        width: props.value + "%"
+        width: props.position + "%"
     };
-    let progressClassName = "progress-bar" + (props.value >= 100 ? " bg-success" : "");
 
     return (
-        <div className="progress">
-            <div className={progressClassName} role="progressbar" style={progressStyle}></div>
+        <div className="form-group row horse">
+            <label className="col-sm-2 col-form-label" htmlFor={"horse-" + props.id}>{props.name}</label>
+            <div className="col-sm-10 horse-progress">
+                <div className="progress">
+                    <div className={progressClassName} id={"horse-" + props.id} role="progressbar" style={progressStyle}></div>
+                </div>
+            </div>
         </div>
     );
 }
 
 class App extends Component {
     state = {
-        progressValue: 0
+        horses: []
     };
 
-    handleClick = () => {
+    startRaceClick = () => {
+        console.log("Race started!")
+    };
+
+    addContestantClick = (contestantName) => {
         this.setState((prevState) => {
             return {
-                progressValue: prevState.progressValue + 10
+                horses: prevState.horses.concat({
+                    id: prevState.horses.length + 1,
+                    name: contestantName
+                })
             };
         });
     };
@@ -54,12 +73,17 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className="col">
-                        <ProgressBar value={this.state.progressValue}/>
+                        <AddContestantForm onAddContestantClick={this.addContestantClick}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col">
-                        <StartRaceButton onHandleClick={this.handleClick}/>
+                        <HorseList horses={this.state.horses}/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <StartRaceButton onStartRaceClick={this.startRaceClick}/>
                     </div>
                 </div>
             </div>
