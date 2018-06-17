@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './Header';
+import RaceButtons from './RaceButtons';
 import AddContestantForm from './AddContestantForm';
 import HorseList from './HorseList';
-
-const Header = (props) => {
-    return (
-        <header className="page-header">
-            <h1 className="display-3">{props.message}</h1>
-        </header>
-    );
-}
-
-const StartRaceButton = (props) => {
-    return (
-        <div className="button-section">
-            <button type="button" className="btn btn-success btn-block" onClick={props.onStartRaceClick}>Start race</button>
-        </div>
-    );
-}
 
 class App extends Component {
     state = {
@@ -90,7 +76,7 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className="col">
-                        <StartRaceButton onStartRaceClick={this.startRaceClick}/>
+                        <RaceButtons onStartRaceClick={this.startRaceClick}/>
                     </div>
                 </div>
             </div>
