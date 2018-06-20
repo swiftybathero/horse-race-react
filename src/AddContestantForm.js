@@ -22,7 +22,7 @@ class AddContestantForm extends Component {
 
     render() {
         return (
-            <form className="contestant-form" ref="contestantForm" onSubmit={this.handleSubmit} noValidate>
+            <form className="contestant-form" ref="contestantForm" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="horseName">Horse name</label>
                     <div className="input-group">
@@ -33,9 +33,10 @@ class AddContestantForm extends Component {
                             className="form-control"
                             placeholder="Enter your horse name" 
                             onChange={this.handleInputChange}
-                            required/>
+                            disabled={this.props.disabled}
+                            autoComplete="off"/>
                         <div className="input-group-append">
-                            <button type="submit" className="btn btn-success">Add</button>
+                            <button type="submit" className="btn btn-success" disabled={this.props.disabled}>Add</button>
                         </div>
                     </div>
                 </div>

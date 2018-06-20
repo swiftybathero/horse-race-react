@@ -8,7 +8,9 @@ import HorseList from './HorseList';
 
 class App extends Component {
     state = {
-        horses: []
+        horses: [],
+        raceFinished: false,
+        raceInProgress: false
     };
 
     randomize = () => {
@@ -28,6 +30,13 @@ class App extends Component {
         }
         let raceFinished = false;
         
+        this.setState({ raceInProgress: true });
+
+        if (this.state.raceFinished === true) {
+            this.resetPositions();
+            return;
+        }
+
         this.state.horses.forEach((horse) => {
             let randomValue = this.randomize();
             horse.position += randomValue;
@@ -35,12 +44,27 @@ class App extends Component {
                 raceFinished = true;
             }
         });
-        this.setState(this.state);
 
-        if (!raceFinished) {
+        if (raceFinished === false) {
             setTimeout(this.runRace, 100);
+        } 
+        else {
+            this.setState({ 
+                raceInProgress: false,
+                raceFinished: true
+            })
         }
     };
+
+    resetPositions = () => {
+            this.state.horses.forEach((horse) => { horse.position = 0 });
+            this.setState({ raceFinished: false });
+            setTimeout(this.runRace, 1000);
+    }    
+
+    resetRaceClick = () => {
+        this.setState({ horses: [] });
+    }
 
     addContestantClick = (contestantName) => {
         this.setState((prevState) => {
@@ -64,7 +88,7 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className="col">
-                        <AddContestantForm onAddContestantClick={this.addContestantClick}/>
+                        <AddContestantForm onAddContestantClick={this.addContestantClick} disabled={this.state.raceInProgress}/>
                     </div>
                 </div>
                 <div className="row">
@@ -74,7 +98,11 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className="col">
-                        <RaceButtons onStartRaceClick={this.startRaceClick}/>
+                        <RaceButtons 
+                            onStartRaceClick={this.startRaceClick} 
+                            onResetRaceClick={this.resetRaceClick}
+                            disabled={this.state.raceInProgress || !this.state.horses.length}
+                            />
                     </div>
                 </div>
             </div>
