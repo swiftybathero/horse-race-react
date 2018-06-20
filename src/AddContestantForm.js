@@ -14,6 +14,10 @@ class AddContestantForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!this.state.horseName) {
+            return;
+        }
+
         this.props.onAddContestantClick(this.state.horseName);
         this.setState({
             horseName: ""
@@ -36,7 +40,7 @@ class AddContestantForm extends Component {
                             disabled={this.props.disabled}
                             autoComplete="off"/>
                         <div className="input-group-append">
-                            <button type="submit" className="btn btn-success" disabled={this.props.disabled}>Add</button>
+                            <button type="submit" className="btn btn-success" disabled={this.props.disabled || !this.state.horseName}>Add</button>
                         </div>
                     </div>
                 </div>
