@@ -63,7 +63,10 @@ class App extends Component {
     }    
 
     resetRaceClick = () => {
-        this.setState({ horses: [] });
+        this.setState({ 
+            horses: [],
+            raceFinished: false
+        });
     }
 
     addContestantClick = (contestantName) => {
