@@ -81,9 +81,17 @@ class App extends Component {
                 horses: prevState.horses.concat({
                     id: prevState.horses.length + 1,
                     name: contestantName,
-                    position: 0
+                    position: 0,
+                    getProgressDOMId: () => {
+                        return "horse-" + (prevState.horses.length + 1);
+                    },
+                    getGroupDOMId: () => {
+                        return "horse-group-" + (prevState.horses.length + 1);
+                    }
                 })
             };
+        }, () => {
+            $('#' + this.state.horses[this.state.horses.length - 1].getGroupDOMId()).collapse('toggle');
         });
     };
 

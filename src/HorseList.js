@@ -7,11 +7,13 @@ const Horse = (props) => {
     };
 
     return (
-        <div className="form-group row horse">
-            <label className="col-sm-2 col-form-label" htmlFor={"horse-" + props.id}>{props.name}</label>
-            <div className="col-sm-10 horse-progress">
-                <div className="progress">
-                    <div className={progressClassName} id={"horse-" + props.id} role="progressbar" style={progressStyle}></div>
+        <div className="collapse" id={props.getGroupDOMId()}>
+            <div className="form-group row horse">
+                <label className="col-sm-2 col-form-label" htmlFor={props.getProgressDOMId()}>{props.name}</label>
+                <div className="col-sm-10 horse-progress">
+                    <div className="progress">
+                        <div className={progressClassName} id={props.getProgressDOMId()} role="progressbar" style={progressStyle}></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -20,7 +22,7 @@ const Horse = (props) => {
 
 const HorseList = (props) => {
     return (
-        <div className={"collapse show"} /*data-toggle="collapse"*/ id="horseList">
+        <div className={"collapse show"} id="horseList">
             {props.horses.map(horse => <Horse key={horse.id} {...horse} />)}
         </div>
     );
