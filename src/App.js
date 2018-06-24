@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header';
 import RaceButtons from './RaceButtons';
 import AddContestantForm from './AddContestantForm';
 import HorseList from './HorseList';
+import $ from 'jquery';
 
 class App extends Component {
     state = {
@@ -63,9 +65,13 @@ class App extends Component {
     }    
 
     resetRaceClick = () => {
-        this.setState({ 
-            horses: [],
-            raceFinished: false
+        $('#horseList').collapse('toggle');
+        $('#horseList').on('hidden.bs.collapse', () => {
+            this.setState({ 
+                horses: [],
+                raceFinished: false
+            });
+            $('#horseList').collapse('toggle');
         });
     }
 

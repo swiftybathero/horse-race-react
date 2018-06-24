@@ -20,7 +20,9 @@ const Horse = (props) => {
 
 const HorseList = (props) => {
     return (
-        props.horses.map(horse => <Horse key={horse.id} {...horse} />)
+        <div className={"collapse show"} /*data-toggle="collapse"*/ id="horseList">
+            {props.horses.map(horse => <Horse key={horse.id} {...horse} />)}
+        </div>
     );
 }
 
