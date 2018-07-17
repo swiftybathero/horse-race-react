@@ -7,19 +7,13 @@ import RaceButtons from './RaceButtons';
 import AddContestantForm from './AddContestantForm';
 import HorseList from './HorseList';
 import $ from 'jquery';
+import { randomize } from './randomize'
 
 class App extends Component {
     state = {
         horses: [],
         raceFinished: false,
         raceInProgress: false
-    };
-
-    randomize = () => {
-        const min = 1;
-        const max = 5; 
-
-        return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
     startRaceClick = () => {
@@ -40,7 +34,10 @@ class App extends Component {
         }
 
         this.state.horses.forEach((horse) => {
-            let randomValue = this.randomize();
+            let randomValue = randomize({
+                min: 1,
+                max: 5
+            });
             horse.position += randomValue;
             if (horse.position >= 100) {
                 raceFinished = true;
