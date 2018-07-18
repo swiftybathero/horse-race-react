@@ -17,3 +17,11 @@
 .form-group.row.horse {
     margin-bottom: 0.5rem;
 }
+
+button.settings-icon {
+    color: #eee;
+}
+
+button.settings-icon:hover {
+    color: #212529;
+}

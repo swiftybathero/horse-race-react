@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCogs } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
 import Header from './Header';
 import RaceButtons from './RaceButtons';
 import AddContestantForm from './AddContestantForm';
 import HorseList from './HorseList';
-import $ from 'jquery';
 import { randomize } from './randomize'
+
+library.add(faCogs);
 
 class App extends Component {
     state = {
