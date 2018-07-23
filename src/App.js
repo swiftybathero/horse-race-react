@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faWrench } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,18 +11,22 @@ import AddContestantForm from './AddContestantForm';
 import HorseList from './HorseList';
 import { randomize } from './randomize'
 
-library.add(faCogs);
+library.add(faCog, faWrench);
 
 class App extends Component {
     state = {
         horses: [],
         raceFinished: false,
-        raceInProgress: false
-    };
+        raceInProgress: false,
+        settings: {
+            minMoveValue: 1,
+            maxMoveValue: 5
+        }
+    }
 
     startRaceClick = () => {
         setTimeout(this.runRace, 1);
-    };
+    }
 
     runRace = () => {
         if (this.state.horses.length <= 0) {
@@ -39,8 +43,8 @@ class App extends Component {
 
         this.state.horses.forEach((horse) => {
             let randomValue = randomize({
-                min: 1,
-                max: 5
+                min: this.state.settings.minMoveValue,
+                max: this.state.settings.maxMoveValue
             });
             horse.position += randomValue;
             if (horse.position >= 100) {
@@ -57,7 +61,7 @@ class App extends Component {
                 raceFinished: true
             })
         }
-    };
+    }
 
     resetPositions = () => {
             this.state.horses.forEach((horse) => { horse.position = 0 });
@@ -90,18 +94,22 @@ class App extends Component {
                         return "horse-group-" + (prevState.horses.length + 1);
                     }
                 })
-            };
+            }
         }, () => {
             $('#' + this.state.horses[this.state.horses.length - 1].getGroupDOMId()).collapse('toggle');
         });
-    };
+    }
+
+    handleSaveSettings = (settings) => {
+        this.setState({ settings: settings });
+    }
 
     render() {
         return (
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <Header message="HorseRace React"/>
+                        <Header message="HorseRace React" onSaveSettings={(savedSettings) => {this.setState({ settings: savedSettings })}}/>
                     </div>
                 </div>
                 <div className="row">
