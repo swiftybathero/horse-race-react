@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCog, faWrench } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faWrench, faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,7 +11,7 @@ import AddContestantForm from './AddContestantForm';
 import HorseList from './HorseList';
 import { randomize } from './randomize'
 
-library.add(faCog, faWrench);
+library.add(faCog, faWrench, faInfo, faInfoCircle);
 
 class App extends Component {
     state = {

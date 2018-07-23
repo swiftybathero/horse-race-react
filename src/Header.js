@@ -1,5 +1,6 @@
 import React from 'react';
 import RaceSettings from './RaceSettings';
+import RaceInfo from './RaceInfo';
 
 const Header = (props) => {
     return (
@@ -12,6 +13,7 @@ const Header = (props) => {
                 <div className="col">
                     <div className="d-flex justify-content-end">
                         <RaceSettings onSaveSettings={props.onSaveSettings} disabled={props.settingsDisabled}/>
+                        <RaceInfo />
                     </div>
                 </div>
             </div>

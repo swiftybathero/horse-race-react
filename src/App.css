@@ -18,10 +18,10 @@
     margin-bottom: 0.5rem;
 }
 
-button.settings-icon {
+button.header-icon {
     color: #eee;
 }
 
-button.settings-icon:hover {
+button.header-icon:hover {
     color: #212529;
 }

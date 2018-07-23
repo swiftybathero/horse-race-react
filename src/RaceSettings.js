@@ -12,7 +12,7 @@ class RaceSettings extends Component {
         rotate: false,
         settings: { ...DefaultSettings },
         tempSettings: { ...DefaultSettings }
-    };
+    }
 
     handleInputChange = (e) => {
         let eventData = { 
@@ -43,14 +43,14 @@ class RaceSettings extends Component {
         return (
             <div>
                 <button type="button" 
-                        className="btn btn-link p-0 settings-icon" 
+                        className="btn btn-link p-0 header-icon" 
                         onMouseOver={() => this.setState({ rotate: true })}
                         onMouseOut={() => this.setState({ rotate: false })}
                         onClick={() => this.setState({ tempSettings: { ...this.state.settings } })}
                         disabled={this.props.disabled}
                         data-toggle="modal"
                         data-target="#settingsModal">
-                    <FontAwesomeIcon icon="cog" size="lg" spin={this.state.rotate}/>
+                    <FontAwesomeIcon icon="cog" size="lg" fixedWidth spin={this.state.rotate}/>
                 </button>
                 <div className="modal fade" tabIndex="-1" role="dialog" id="settingsModal">
                     <div className="modal-dialog modal-dialog-centered" role="document">
@@ -58,7 +58,7 @@ class RaceSettings extends Component {
                         <div className="modal-header">
                             <h5 className="modal-title">
                                 <FontAwesomeIcon icon="wrench" size="xs"/>
-                                <span> Race settings</span>
+                                <span className="ml-2">Race settings</span>
                             </h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -87,8 +87,8 @@ class RaceSettings extends Component {
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={this.handleSaveSettings}>Apply</button>
+                            <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-success" onClick={this.handleSaveSettings}>Apply</button>
                         </div>
                         </div>
                     </div>
