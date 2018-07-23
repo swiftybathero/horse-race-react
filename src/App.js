@@ -105,16 +105,20 @@ class App extends Component {
     }
 
     render() {
+        let raceInProgress = this.state.raceInProgress;
+
         return (
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <Header message="HorseRace React" onSaveSettings={(savedSettings) => {this.setState({ settings: savedSettings })}}/>
+                        <Header message="HorseRace React" 
+                                onSaveSettings={this.handleSaveSettings}
+                                settingsDisabled={raceInProgress}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col">
-                        <AddContestantForm onAddContestantClick={this.addContestantClick} disabled={this.state.raceInProgress}/>
+                        <AddContestantForm onAddContestantClick={this.addContestantClick} disabled={raceInProgress}/>
                     </div>
                 </div>
                 <div className="row">

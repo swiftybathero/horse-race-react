@@ -11,7 +11,7 @@ const Header = (props) => {
                 </div>
                 <div className="col">
                     <div className="d-flex justify-content-end">
-                        <RaceSettings onSaveSettings={props.onSaveSettings}/>
+                        <RaceSettings onSaveSettings={props.onSaveSettings} disabled={props.settingsDisabled}/>
                     </div>
                 </div>
             </div>

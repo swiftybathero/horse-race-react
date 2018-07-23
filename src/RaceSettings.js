@@ -47,6 +47,7 @@ class RaceSettings extends Component {
                         onMouseOver={() => this.setState({ rotate: true })}
                         onMouseOut={() => this.setState({ rotate: false })}
                         onClick={() => this.setState({ tempSettings: { ...this.state.settings } })}
+                        disabled={this.props.disabled}
                         data-toggle="modal"
                         data-target="#settingsModal">
                     <FontAwesomeIcon icon="cog" size="lg" spin={this.state.rotate}/>
