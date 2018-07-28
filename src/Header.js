@@ -11,7 +11,7 @@ const Header = (props) => {
                     <h1 className="display-4 text-center">{props.message}</h1>
                 </div>
                 <div className="col">
-                    <div className="d-flex justify-content-end">
+                    <div className="d-flex flex-wrap-reverse justify-content-end">
                         <RaceSettings onSaveSettings={props.onSaveSettings} disabled={props.settingsDisabled}/>
                         <RaceInfo />
                     </div>

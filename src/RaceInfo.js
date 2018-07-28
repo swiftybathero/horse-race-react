@@ -24,16 +24,16 @@ const RaceInfo = () => {
                     <div className="modal-body">
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-3"><p className="font-weight-bold">Author</p></div>
-                                <div className="col"><p>Paweł Klatt</p></div>
+                                <div className="col-sm-3"><p className="font-weight-bold">Author</p></div>
+                                <div className="col-sm"><p>Paweł Klatt</p></div>
                             </div>
                             <div className="row">
-                                <div className="col-3"><p className="font-weight-bold">Description</p></div>
-                                <div className="col"><p>Remake of oldschool DynamicsAX minigame</p></div>
+                                <div className="col-sm-3"><p className="font-weight-bold">Description</p></div>
+                                <div className="col-sm"><p>Remake of oldschool DynamicsAX minigame</p></div>
                             </div>
                             <div className="row">
-                                <div className="col-3"><p className="font-weight-bold">Technologies</p></div>
-                                <div className="col"><p>ReactJS, jQuery, HTML5, Bootstrap 4</p></div>
+                                <div className="col-sm-3"><p className="font-weight-bold">Technologies</p></div>
+                                <div className="col-sm"><p>ReactJS, jQuery, HTML5, Bootstrap 4</p></div>
                             </div>
                         </div>
                     </div>
