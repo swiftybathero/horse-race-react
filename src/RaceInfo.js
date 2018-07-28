@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Modal from './Modal';
 
-const RaceInfo = () => {
+const RaceInfo = (props) => {
     const modalId = "infoModal";
     const modalBody = (
         <React.Fragment>
@@ -23,6 +23,7 @@ const RaceInfo = () => {
     return (
         <div>
             <button className="btn btn-link p-0 header-icon"
+                    disabled={props.disabled}
                     data-toggle="modal"
                     data-target={"#" + modalId}>
                 <FontAwesomeIcon icon="info" size="lg" fixedWidth/>

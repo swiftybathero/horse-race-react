@@ -18,7 +18,7 @@
     margin-bottom: 0.5rem;
 }
 
-button.header-icon {
+button.header-icon, button.btn-link.disabled, button.btn-link:disabled {
     color: #eee;
 }
 
