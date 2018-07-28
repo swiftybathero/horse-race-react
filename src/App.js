@@ -11,7 +11,7 @@ import AddContestantForm from './AddContestantForm';
 import HorseList from './HorseList';
 import { randomize } from './randomize'
 
-library.add(faCog, faWrench, faInfo, faInfoCircle);
+library.add(faCog, faWrench, faInfo);
 
 class App extends Component {
     state = {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import $ from 'jquery';
+import Modal from './Modal';
 
 const DefaultSettings = {
     minMoveValue: 1,
@@ -28,7 +29,7 @@ class RaceSettings extends Component {
         })
     }
 
-    handleSaveSettings = () => {
+    handleConfirm = () => {
         $('#settingsModal').modal('toggle');
         this.setState({
             settings: {
@@ -40,6 +41,27 @@ class RaceSettings extends Component {
     }
 
     render() {
+        const modalId = "settingsModal";
+        const modalBody = (
+            <form>
+                <div className="form-group">
+                    <label>Minimum move value</label>
+                    <input className="form-control" 
+                            type="number" 
+                            name="minMoveValue" 
+                            onChange={this.handleInputChange}
+                            value={this.state.tempSettings.minMoveValue}/>
+                </div>
+                <div className="form-group">
+                    <label>Maximum move value</label>
+                    <input className="form-control" 
+                            type="number" 
+                            name="maxMoveValue" 
+                            onChange={this.handleInputChange}
+                            value={this.state.tempSettings.maxMoveValue}/>
+                </div>
+            </form>
+        );
         return (
             <div>
                 <button type="button" 
@@ -49,50 +71,14 @@ class RaceSettings extends Component {
                         onClick={() => this.setState({ tempSettings: { ...this.state.settings } })}
                         disabled={this.props.disabled}
                         data-toggle="modal"
-                        data-target="#settingsModal">
+                        data-target={"#" + modalId}>
                     <FontAwesomeIcon icon="cog" size="lg" fixedWidth spin={this.state.rotate}/>
                 </button>
-                <div className="modal fade" tabIndex="-1" role="dialog" id="settingsModal">
-                    <div className="modal-dialog modal-dialog-centered" role="document">
-                        <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">
-                                <FontAwesomeIcon icon="wrench" size="xs"/>
-                                <span className="ml-2">Race settings</span>
-                            </h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="container-fluid">
-                                <form>
-                                    <div className="form-group">
-                                        <label>Minimum move value</label>
-                                        <input className="form-control" 
-                                               type="number" 
-                                               name="minMoveValue" 
-                                               onChange={this.handleInputChange}
-                                               value={this.state.tempSettings.minMoveValue}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Maximum move value</label>
-                                        <input className="form-control" 
-                                               type="number" 
-                                               name="maxMoveValue" 
-                                               onChange={this.handleInputChange}
-                                               value={this.state.tempSettings.maxMoveValue}/>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-success" onClick={this.handleSaveSettings}>Apply</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+                <Modal id={modalId} 
+                       body={modalBody} 
+                       title="Race settings" 
+                       icon={<FontAwesomeIcon icon="wrench" size="xs"/>} 
+                       onConfirm={this.handleConfirm}/>
             </div>
         );
     }
